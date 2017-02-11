@@ -1,71 +1,34 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "JHanley85/hapi-s3-upload",
-        "scope": null,
-        "escapedName": null,
-        "name": null,
-        "rawSpec": "JHanley85/hapi-s3-upload",
-        "spec": "github:jhanley85/hapi-s3-upload",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:jhanley85/hapi-s3-upload.git",
-          "sshUrl": "git+ssh://git@github.com/jhanley85/hapi-s3-upload.git",
-          "httpsUrl": "git+https://github.com/jhanley85/hapi-s3-upload.git",
-          "gitUrl": "git://github.com/jhanley85/hapi-s3-upload.git",
-          "shortcut": "github:jhanley85/hapi-s3-upload",
-          "directUrl": "https://raw.githubusercontent.com/jhanley85/hapi-s3-upload/master/package.json"
-        }
-      },
-      "D:\\Athena\\hoodie-app-tracker"
-    ]
+  "name": "hapi-s3-upload",
+  "version": "1.1.0",
+  "description": "Node.js Hapi AWS S3 upload plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab -L -I @@any-promise/REGISTRATION",
+    "coverage": "lab -c -L -I @@any-promise/REGISTRATION -r html -o ./coverage/index.html && opn ./coverage/index.html"
+  },
+  "author": "Glenn Geenen <glenn@geenentijd.be>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GlennGeenen/hapi-s3-upload"
+  },
+  "bugs": "https://github.com/GlennGeenen/hapi-s3-upload/issues",
+  "keywords": [
+    "hapi",
+    "plugin",
+    "AWS",
+    "S3",
+    "upload"
   ],
-  "_from": "jhanley85/hapi-s3-upload",
-  "_id": "hapi-s3-upload@1.1.0",
-  "_inCache": true,
-  "_location": "/hapi-s3-upload",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "JHanley85/hapi-s3-upload",
-    "scope": null,
-    "escapedName": null,
-    "name": null,
-    "rawSpec": "JHanley85/hapi-s3-upload",
-    "spec": "github:jhanley85/hapi-s3-upload",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:jhanley85/hapi-s3-upload.git",
-      "sshUrl": "git+ssh://git@github.com/jhanley85/hapi-s3-upload.git",
-      "httpsUrl": "git+https://github.com/jhanley85/hapi-s3-upload.git",
-      "gitUrl": "git://github.com/jhanley85/hapi-s3-upload.git",
-      "shortcut": "github:jhanley85/hapi-s3-upload",
-      "directUrl": "https://raw.githubusercontent.com/jhanley85/hapi-s3-upload/master/package.json"
-    }
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "utils.js"
   ],
-  "_resolved": "git://github.com/jhanley85/hapi-s3-upload.git#9c8d04e9e33a8dc63d4f42719350e33b66c9cb15",
-  "_shasum": "debd3ea88531de5fb82eb48c91641221b38ff7d0",
-  "_shrinkwrap": null,
-  "_spec": "JHanley85/hapi-s3-upload",
-  "_where": "D:\\Athena\\hoodie-app-tracker",
-  "author": {
-    "name": "Glenn Geenen",
-    "email": "glenn@geenentijd.be"
-  },
-  "bugs": {
-    "url": "https://github.com/GlennGeenen/hapi-s3-upload/issues"
-  },
   "dependencies": {
     "aws-sdk": "2.x.x",
     "boom": "*"
   },
-  "description": "Node.js Hapi AWS S3 upload plugin",
   "devDependencies": {
     "assert": "1.x.x",
     "eslint": "3.x.x",
@@ -79,33 +42,5 @@
     "opn-cli": "3.x.x",
     "proxyquire": "1.x.x",
     "stream-to-promise": "2.x.x"
-  },
-  "files": [
-    "index.js",
-    "utils.js"
-  ],
-  "gitHead": "9c8d04e9e33a8dc63d4f42719350e33b66c9cb15",
-  "homepage": "https://github.com/GlennGeenen/hapi-s3-upload#readme",
-  "keywords": [
-    "hapi",
-    "plugin",
-    "AWS",
-    "S3",
-    "upload"
-  ],
-  "license": "MIT",
-  "main": "index.js",
-  "name": "hapi-s3-upload",
-  "optionalDependencies": {},
-  "readme": "# hapi-s3-upload\r\n\r\n[![Build Status](https://travis-ci.org/GlennGeenen/hapi-s3-upload.svg?branch=master)](https://travis-ci.org/GlennGeenen/hapi-s3-upload)\r\n\r\nThis plugin exposes a route to upload a file to S3. You POST file in multipart/form-data.\r\n\r\n## Options\r\n\r\n### Optional\r\n\r\n- path: default /upload\r\n- cors: default false\r\n- auth: default no auth\r\n- contentTypes: default ['application/pdf', 'image/jpeg', 'image/png']\r\n- maxBytes: default 10485760\r\n- prependDate: default false (adds DD-MM-YYYY/ when true)\r\n\r\n### Required\r\n\r\n- s3AccessKey\r\n- s3SecretKey\r\n- s3Region\r\n- s3Bucket\r\n\r\n## Usage\r\n\r\n```\r\nconst options = {\r\n  s3AccessKey: process.env.S3_ACCESS_KEY,\r\n  s3SecretKey: process.env.S3_SECRET_KEY,\r\n  s3Region: process.env.S3_REGION,\r\n  s3Bucket: process.env.S3_BUCKET\r\n};\r\n\r\nserver.register({\r\n  register: require('hapi-s3-upload'),\r\n  options\r\n}, (err) => {\r\n\r\n  // Done\r\n});\r\n```\r\n",
-  "readmeFilename": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GlennGeenen/hapi-s3-upload.git"
-  },
-  "scripts": {
-    "coverage": "lab -c -L -I @@any-promise/REGISTRATION -r html -o ./coverage/index.html && opn ./coverage/index.html",
-    "test": "lab -L -I @@any-promise/REGISTRATION"
-  },
-  "version": "1.1.0"
+  }
 }
